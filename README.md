@@ -1,6 +1,6 @@
 # **Nhập Môn Xử Lý Ảnh Số - Bài Thực Hành Lab 2 & 3**
-**Sinh viên thực hiện:** Example  
-**MSSV:** Example  
+**Sinh viên thực hiện:** Nguyễn Kim Gia Bách
+**MSSV:** 2174802010320
 **Môn học:** Nhập môn Xử lý ảnh số  
 **Giảng viên:** Đỗ Hữu Quân
 
