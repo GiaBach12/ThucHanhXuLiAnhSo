@@ -1,4 +1,4 @@
-# **Nhập Môn Xử Lý Ảnh Số - Bài Thực Hành Lab 2 & 3**
+# **Nhập Môn Xử Lý Ảnh Số - Bài Thực Hành Lab 2 & 3 & 4 **
 **Sinh viên thực hiện:** Nguyễn Kim Gia Bách
 **MSSV:** 2174802010320
 **Môn học:** Nhập môn Xử lý ảnh số  
