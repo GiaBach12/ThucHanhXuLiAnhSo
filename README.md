@@ -142,6 +142,65 @@ pip install pillow numpy matplotlib imageio scipy
 *   Thực thi từng ô mã (cell) để quan sát kết quả của các thuật toán[1][2].
 *   Đảm bảo các tệp ảnh được đặt đúng trong thư mục `images/` hoặc cập nhật đường dẫn tương ứng trong mã nguồn[1][2].
 
+## **Lab 4: Phân Vùng Ảnh (Image Segmentation)**
+
+Bài thực hành này tập trung vào kỹ thuật **phân vùng ảnh (segmentation)** – bước quan trọng trong xử lý ảnh nhằm chia ảnh thành các vùng có đặc điểm giống nhau (ví dụ màu sắc, cường độ hoặc kết cấu) để dễ dàng phân tích hoặc nhận diện đối tượng.
+
+### **1. Phân vùng dựa trên Histogram**
+* **Mục đích**: Dựa vào biểu đồ histogram để xác định ngưỡng phân vùng, tách ảnh thành các vùng sáng và tối.
+* **Phương pháp**: Ngưỡng toàn cục (global thresholding) được xác định bằng cách chọn một ngưỡng cường độ nhất định (ví dụ 127) để nhị phân hóa ảnh.
+* **Code chính**:
+```python
+import cv2
+import matplotlib.pyplot as plt
+
+img = cv2.imread("image.jpg", 0)
+_, thresh = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+
+plt.subplot(1,2,1)
+plt.imshow(img, cmap='gray')
+plt.title('Ảnh gốc')
+
+plt.subplot(1,2,2)
+plt.imshow(thresh, cmap='gray')
+plt.title('Ảnh sau phân vùng')
+plt.show()
+```
+
+### **2. Phân vùng bằng thuật toán Otsu**
+* **Mục đích**: Tự động tìm ngưỡng phân vùng tối ưu mà không cần đặt trước.
+* **Ưu điểm**: Tối ưu cho ảnh có histogram dạng hai đỉnh.
+* **Code chính**:
+```python
+_, otsu_thresh = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+plt.imshow(otsu_thresh, cmap='gray')
+plt.title('Phân vùng bằng Otsu')
+plt.show()
+```
+
+### **3. Phân vùng bằng Adaptive Thresholding**
+* **Mục đích**: Áp dụng ngưỡng cục bộ cho từng vùng nhỏ trong ảnh, thích hợp với ảnh có độ chiếu sáng không đồng đều.
+* **Code chính**:
+```python
+adaptive_thresh = cv2.adaptiveThreshold(
+    img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+    cv2.THRESH_BINARY, 11, 2)
+
+plt.imshow(adaptive_thresh, cmap='gray')
+plt.title('Phân vùng thích nghi')
+plt.show()
+```
+
+### **4. Kết quả và đánh giá**
+* Histogram Threshold: Phù hợp với ảnh có độ tương phản rõ ràng.
+* Otsu: Tự động, hiệu quả với ảnh đơn giản.
+* Adaptive: Hiệu quả khi ảnh có ánh sáng không đồng đều.
+
+### **Bài tập Lab 4**
+1. Viết chương trình cho phép người dùng chọn phương pháp phân vùng: thủ công, Otsu, hay Adaptive.
+2. Cho phép người dùng thay đổi ngưỡng, block size (adaptive) để quan sát kết quả khác nhau.
+3. Áp dụng các kỹ thuật lên nhiều loại ảnh khác nhau (ảnh xám, ảnh có nhiễu...).
+
 ## **Tài liệu tham khảo**
 
 *   Sách *Digital Image Processing* của Rafael C. Gonzalez và Richard E. Woods[1].
